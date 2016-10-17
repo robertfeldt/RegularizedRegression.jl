@@ -35,8 +35,8 @@ end
 # R2adjusted instead of R2.
 function describe_goodness_of_fit(yhat, y, k = false)
   if k != false
-    @sprintf("MAPE = %.2f%%, R2adj = %.2f", mape(yhat, y), r2adjusted(yhat, y, k))
+    @sprintf("MAPE = %.2f%%, R2adj = %.2f, MASE = %.2f", mape(yhat, y), r2adjusted(yhat, y, k), mase(yhat, y))
   else
-    @sprintf("MAPE = %.2f%%, R2 = %.2f", mape(yhat, y), r2(yhat, y))
+    @sprintf("MAPE = %.2f%%, R2 = %.2f, MASE = %.2f", mape(yhat, y), r2(yhat, y), mase(yhat, y))
   end
 end
