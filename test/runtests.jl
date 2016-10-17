@@ -10,7 +10,11 @@ include("helper.jl")
 import Compat.String
 
 my_tests = [
-    "test_loss_functions.jl"
+    "test_loss_functions.jl",
+
+    "test_matrix_dataset.jl",
+
+    "test_scad_and_mcp_regression.jl",
 ]
 
 if Main.TimeTestExecution

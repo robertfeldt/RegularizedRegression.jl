@@ -2,4 +2,4 @@ using RegularizedRegression
 using BaseTestNext
 using Compat
 
-const NumTestRepetitions = 100
+const NumTestRepetitions = 30

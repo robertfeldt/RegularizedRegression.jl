@@ -22,6 +22,10 @@ end
     @test mase([1.5, 2.0, 3.0], [1.0, 1.5, 2.0]) == (0.5+0.5+1.0)/(3.0/2.0 * (0.5 + 0.5))
 end
 
+#@testset "R2" begin
+#    @test r2([1.5, 2.0, 3.0], [1.0, 1.5, 2.0]) == (1.0 - ()
+#end
+
 @testset "describe_goodness_of_fit" begin
     str = describe_goodness_of_fit([1.5, 2.0, 3.0], [1.0, 1.5, 2.0])
     @test typeof(str) <: AbstractString
