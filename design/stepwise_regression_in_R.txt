@@ -1,0 +1,8 @@
+1. Backwards elimination:
+  step(lm(DepVar ~ List + all + indep + vars, data=df), direction="backward")
+
+2. Forward elimination:
+  step(lm(DepVar ~ 1, data=df), direction="forward", scope = ~List + all + indep + vars)
+
+3. Stepwise regression:
+  step(lm(DepVar ~ List + all + indep + vars, data=df), direction="both")
