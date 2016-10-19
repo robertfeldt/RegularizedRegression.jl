@@ -2,8 +2,8 @@
 # we provide an installation and build function that users need to call manually.
 
 SLOPE_CODE_URL = "http://www-stat.stanford.edu/~candes/SortedL1/SLOPE_code.tgz"
-#SLOPEDestDir = joinpath(dirname(@__FILE__()), "slope_code")
-SLOPEDestDir = "/Users/feldt/dev/RegularizedRegression.jl/src/utils/slope_code"
+SLOPEDestDir = joinpath(dirname(@__FILE__()), "slope_code")
+#SLOPEDestDir = "/Users/feldt/dev/RegularizedRegression.jl/src/utils/slope_code"
 SLOPEUnpackDir = "SLOPE_code" # Name of the dir where the tar file unpacks to
 
 using Requests
@@ -41,7 +41,7 @@ end
 function download_SLOPE_code_tarball_and_save_to_file(url)
     filename = "SLOPE_code.tgz"
     open(filename, "w") do fh
-        write(fh, readbytes(get(url)))
+        write(fh, Requests.readbytes(get(url)))
     end
     return filename
 end
@@ -49,9 +49,15 @@ end
 function is_installed_SLOPE()
     global SLOPECodeInPathLoaded
     if SLOPECodeInPathLoaded != false
-        isfile(joinpath(SLOPECodeInPathLoaded, "cproxSortedL1.so"))
+        return isfile(joinpath(SLOPECodeInPathLoaded, "cproxSortedL1.so"))
     else
-        false
+        default_path = joinpath(SLOPEDestDir, SLOPEUnpackDir)
+        if isfile(joinpath(default_path, "cproxSortedL1.so"))
+            SLOPECodeInPathLoaded = default_path
+            return true
+        else
+            return false
+        end
     end
 end
 
