@@ -11,10 +11,12 @@ include("matrix_dataset.jl")
 
 # Different Regression algorithms all implement the abstract RegressionLearner interface.
 abstract RegressionLearner
+abstract RegressionResult
 learn(l::RegressionLearner, ds::DataSet) = error("Not implemented!")
 
 include(joinpath("learners", "ncvreg_scad_and_mcp_regression.jl"))
 include(joinpath("learners", "slope_regression.jl"))
+include(joinpath("learners", "glmnet_lasso_and_ridge_regression.jl"))
 
 export mape, mase, r2, r2adjusted
 #export ScadRegression, McpRegression, learn, coefficients

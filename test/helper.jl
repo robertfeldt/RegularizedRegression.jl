@@ -4,7 +4,7 @@ using Compat
 
 const NumTestRepetitions = 30
 
-using RegularizedRegression: learn, coefficients
+using RegularizedRegression: learn, coefficients, RegressionResult
 
 function make_dataset(pRange, nRange, coefRange)
     N = rand(pRange)
@@ -22,7 +22,7 @@ function test_learner_with_includeIntercept(learnertype, maxMape = 10.0)
     l = learnertype()
 
     res = learn(l, ds)
-    @test typeof(res) <: Dict
+    @test (typeof(res) <: Dict || typeof(res) <: RegressionResult)
 
     beta = coefficients(l, ds)
     @test typeof(beta) <: Array
@@ -41,7 +41,7 @@ function test_learner(learnertype, maxMape = 10.0)
     l = learnertype()
 
     res = learn(l, ds)
-    @test typeof(res) <: Dict
+    @test (typeof(res) <: Dict || typeof(res) <: RegressionResult)
 
     beta = coefficients(l, ds)
     @test typeof(beta) <: Array
