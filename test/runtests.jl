@@ -15,6 +15,7 @@ my_tests = [
     "test_matrix_dataset.jl",
 
     "test_scad_and_mcp_regression.jl",
+    "test_slope_regression.jl",
 ]
 
 if Main.TimeTestExecution

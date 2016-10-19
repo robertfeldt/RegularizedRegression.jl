@@ -1,6 +1,6 @@
 const SlopeDefaultParams = Dict(
     :iterations => 10000,
-    :verbosity  => 1,
+    :verbosity  => 0, # Print intermediate info if > 0
     :optimIter  => 1,
     :gradIter   => 20,
     :tolInfeas  => 1e-6,
@@ -25,11 +25,12 @@ function learn(r::SlopeRegression, dataset::DataSet)
     default_params = copy(SlopeDefaultParams)
     params = merge(default_params, r.params)
 
+    # Create lambda that needs to be as long as the num of coefficients we want to find
+    numcoefs = size(X, 2)
+    lambda = (1.0 / numcoefs) * collect(numcoefs:-1:1)
+
     # Now call Adlas and copy back the result as a Dict
-    retval = R"""
-      p <- $params
-      Adlas($X, $y, $lambda, options = p)
-    """
+    retval = R"Adlas($X, $y, $lambda, $params)"
     rcopy(retval)
 end
 
