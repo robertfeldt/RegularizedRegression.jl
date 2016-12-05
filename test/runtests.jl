@@ -54,7 +54,7 @@ using CPUTime
 
 numtestfiles = 0
 starttime = CPUtime_us()
-@testset "BlackBoxOptim test suite" begin
+@testset "RegularizedRegression test suite" begin
 
 for t in my_tests
     if Main.TimeTestExecution
